@@ -1,2 +1,3 @@
-# HandleLength
-A Robofont Tool to show/hide the length of handles.
+# Measure Handles Tool
+
+A Robofont Tool to display the length and angle of Bezier handles.
