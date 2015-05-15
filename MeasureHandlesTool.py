@@ -9,19 +9,25 @@ from mojo.events import *
 from mojo.drawingTools import *
 from mojo.extensions import getExtensionDefault, setExtensionDefault
 
+#-----------
 # constants
+#-----------
 
+#: Handle length in relation to circle radius, for creating circles with Bezier curves.
 BEZIER_ARC_CIRCLE = 0.5522847498
 
+#-----------
 # functions
+#-----------
 
 def vector((x, y), angle, distance):
-    """Calculate a new position `(x, y)` based on a given angle and distance."""
+    """Calculate a new position based on a given angle and distance."""
     _x = x + cos(radians(angle)) * distance
     _y = y + sin(radians(angle)) * distance
     return _x, _y
 
 def get_vector((x1, y1), (x2, y2)):
+    """Get the distance and angle between two points."""
     a = x2 - x1
     b = y2 - y1
     distance = sqrt(a ** 2 + b ** 2)
@@ -32,7 +38,9 @@ def get_vector((x1, y1), (x2, y2)):
         angle_degrees = 0
     return distance, angle_degrees
 
+#---------
 # objects
+#---------
 
 class HandlesMeasures(object):
 
@@ -49,7 +57,7 @@ class HandlesMeasures(object):
     font = "Lucida Grande Bold"
 
     stroke_width = 1
-    color = 0, 0.5, 1
+    color = 1, 0.5, 0
     stroke_alpha = 0.65
 
     def __init__(self, glyph):
@@ -123,19 +131,19 @@ class HandlesMeasures(object):
                     line((x0, y0), (x1, y1))
 
                     if y1 > y0:
-                        y1_ = y1 + 4 * scale
+                        y1_ = (y1 + 4) * scale
                     else:
-                        y1_ = y1 - 14 * scale
+                        y1_ = (y1 - 14) * scale
 
                     if x1 > x0:
-                        x1_ = x1 + 4 * scale
+                        x1_ = (x1 + 4) * scale
                     else:
-                        x1_ = x1 - 19 * scale
+                        x1_ = (x1 - 19) * scale
 
                     stroke(None)
                     fill(*self.color)
-                    text('%.2f' % w1, (x0 + w1 * 0.5, y1_))
-                    text('%.2f' % h1, (x1_, y0 + h1 * 0.5))
+                    text('%.2f' % abs(w1), (x0 + w1 * 0.5, y1_))
+                    text('%.2f' % abs(h1), (x1_, y0 + h1 * 0.5))
 
                 if self.draw_out and not int(w2) == 0 and not int(h2) == 0:
                     fill(None)
@@ -145,19 +153,19 @@ class HandlesMeasures(object):
                     line((x0, y0), (x2, y2))
 
                     if y2 > y0:
-                        y2_ = y2 + 4 * scale
+                        y2_ = (y2 + 4) * scale
                     else:
-                        y2_ = y2 - 14 * scale
+                        y2_ = (y2 - 14) * scale
 
                     if x2 > x0:
-                        x2_ = x2 + 4 * scale
+                        x2_ = (x2 + 4) * scale
                     else:
-                        x2_ = x2 - 19 * scale
+                        x2_ = (x2 - 19) * scale
 
                     stroke(None)
                     fill(*self.color)
-                    text('%.2f' % x2, (x0 + w2 * 0.5, y2_))
-                    text('%.2f' % y2, (x2_, y0 + h2 * 0.5))
+                    text('%.2f' % abs(x2), (x0 + w2 * 0.5, y2_))
+                    text('%.2f' % abs(y2), (x2_, y0 + h2 * 0.5))
 
         restore()
 
@@ -301,13 +309,11 @@ class HandlesMeasures(object):
 
         restore()
 
-# get tool icon
-
-icon_file_name = 'measure-handles-tool-icon.pdf'
-dirname = os.path.dirname(__file__)
-toolbar_icon = NSImage.alloc().initByReferencingFile_(os.path.join(dirname, icon_file_name))
-
 class MeasureHandlesTool(EditingTool):
+
+    icon_file_name = 'measure-handles-tool-icon.pdf'
+    dirname = os.path.dirname(__file__)
+    toolbar_icon = NSImage.alloc().initByReferencingFile_(os.path.join(dirname, icon_file_name))
 
     def setup(self):
         glyph = self.getGlyph()
@@ -317,11 +323,13 @@ class MeasureHandlesTool(EditingTool):
         self.calculator.draw(scale)
 
     def getToolbarIcon(self):
-        return toolbar_icon
+        return self.toolbar_icon
 
     def getToolbarTip(self):
         return "Measure Handles Tool"
 
+#--------------
 # install tool
+#--------------
 
 installTool(MeasureHandlesTool())
