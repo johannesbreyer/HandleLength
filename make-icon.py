@@ -28,7 +28,7 @@ h = height() * (1.0 - m * 2)
 stroke(0)
 lineCap('butt')
 fill(None)
-strokeWidth(sw * 0.75)
+strokeWidth(sw * 0.7)
 lineDash(None)
 line((p0_x, p0_y), (p3_x, p3_y))
 
@@ -38,13 +38,13 @@ stroke(0)
 strokeWidth(sw)
 fill(None)
 strokeWidth(sw2)
-lineDash(sw2 * 1.5, sw2)
+lineDash(sw2 * 1.15, sw2 *1.45)
 rect(p0_x, p0_y, w, h)
 
 # draw on-curve point
 
 fill(1)
-strokeWidth(sw)
+strokeWidth(sw * 1)
 lineDash(None)
 rect(p0_x - r, p0_y - r, r * 2, r * 2)
 
