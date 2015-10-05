@@ -58,9 +58,9 @@ class MeasureHandles(object):
 
     stroke_width = 1
 
-    color_angle = 0, 1, 1
+    color_angle = 1, 0, 0
     color_box = 1, 0, 0
-    color_handle = 0, 0, 1
+    color_handle = 1, 0, 0
 
     stroke_alpha = 0.65
     stroke_dash = 2
