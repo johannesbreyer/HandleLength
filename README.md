@@ -12,9 +12,11 @@ Idea by Johannes Breyer (of [Dinamo](http://dinamo.us/), together with Fabian Ha
 
 ## How to use it
 
-1. Run the script `build-extension.py` in RoboFont to build the file `MeasureHandles.roboFontExt`.
-2. Double-click this file to install the extension. A new tool will be added to your RoboFont tools palette (available at the top of the Glyph Window).
-3. Click the icon to activate the tool.
+Simply double-click the .roboFontExtension file to install in RoboFont.
+
+Also available via [Mechanic](http://www.robofontmechanic.com/).
+
+The extension adds a new tool to your RoboFont tools palette (available at the top of the Glyph Window). Click the Measure Handles icon to activate the tool.
 
 ## To-Do
 
