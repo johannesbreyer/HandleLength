@@ -14,20 +14,21 @@ BEZIER_ARC_CIRCLE = 0.5522847498
 # functions
 #-----------
 
-def vector((x, y), angle, distance):
+def vector(xy, angle, distance):
     """
     Calculate a new position based on a given angle and distance.
-
     """
+    x, y = xy
     _x = x + cos(radians(angle)) * distance
     _y = y + sin(radians(angle)) * distance
     return _x, _y
 
-def get_vector((x1, y1), (x2, y2)):
+
+def get_vector(pt1, pt2):
     """
     Get the distance and angle between two points.
-
     """
+    (x1, y1), (x2, y2) = pt1, pt2
     a = x2 - x1
     b = y2 - y1
     distance = sqrt(a ** 2 + b ** 2)
